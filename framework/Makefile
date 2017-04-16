@@ -6,7 +6,7 @@
 #    By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/01 21:02:30 by pbondoer          #+#    #+#              #
-#    Updated: 2017/02/12 21:29:55 by pbondoer         ###   ########.fr        #
+#    Updated: 2017/04/16 16:56:15 by pbondoer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,11 @@ OBJ		:= $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 CC		:= gcc
 CFLAGS	:= -Wall -Wextra -Werror -pedantic -std=c99
 CFLAGS	+= -O3 -march=native -pipe -flto
+
+DEBUG	:= 0
+ifeq ($(DEBUG),1)
+CFLAGS	+= -g -fsanitize=address
+endif
 
 L_FT	:= ../libft
 include $(L_FT)/libft.mk
