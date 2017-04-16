@@ -2,6 +2,7 @@
 
 ![Where are the
 tests?](https://www.commitstrip.com/wp-content/uploads/2017/02/Strip-Ou-sont-les-tests-unitaires-english650-final.jpg)
+
 *Source: http://www.commitstrip.com/en/2017/02/08/where-are-the-tests/*
 
 This is a small library developed at 42 to help with the task of unit testing.
