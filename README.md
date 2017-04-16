@@ -30,51 +30,56 @@ Here's a basic example:
 #include "libunit.h"
 #include <signal.h>
 
-int				main(int argc, char **argv)
+int             main(int argc, char **argv)
 {
-	static t_unit_list *list = NULL;
+    static t_unit_list *list = NULL;
 
-	(void)argc;
-	unit_add_suite(&list, "Basic tests", basic_tests());
-	// Add more suites as needed
-	return (unit_run_all(list, argv[0]));
+    (void)argc;
+    unit_add_suite(&list, "Basic tests", basic_tests());
+    // Add more suites as needed
+
+    return (unit_run_all(list, argv[0]));
 }
 
-t_unit_suite	*basic_tests(void)
+t_unit_suite    *basic_tests(void)
 {
-	static t_unit_suite *suite = NULL;
+    static t_unit_suite *suite = NULL;
 
-	if (suite)
-		return (suite);
-	unit_add_test(&suite, "Simple test", &simple_test, 0);
-	// Your tests can also write to stdout!
-	unit_add_test_output(&suite, "Stdout test", &another_test, 0);
-	// You can also add tests that are expected to fail
-	unit_add_test(&suite, "Segfault test", &segv_test, SIGSEGV);
-	return (suite);
+    if (suite)
+        return (suite);
+
+    unit_add_test(&suite, "Simple test", &simple_test, 0);
+
+    // Your tests can also write to stdout!
+    unit_add_test_output(&suite, "Stdout test", &another_test, 0);
+
+    // You can also add tests that are expected to fail
+    unit_add_test(&suite, "Segfault test", &segv_test, SIGSEGV);
+
+    return (suite);
 }
 
 // a simple equality test
-int				simple_test(void)
+int             simple_test(void)
 {
-	if (ft_strlen(test) == strlen(test))
-		return (TEST_SUCCESS);
-	else
-		return (TEST_ERROR);
+    if (ft_strlen(test) == strlen(test))
+        return (TEST_SUCCESS);
+    else
+        return (TEST_ERROR);
 }
 
 // p here is a pointer to the stdout/stdin pipe
-int				stdout_test(int *p)
+int             stdout_test(int *p)
 {
-	ft_putstr("abc");
-	return (unit_assert_output(p, "abc"));
+    ft_putstr("abc");
+    return (unit_assert_output(p, "abc"));
 }
 
 // this test is meant to fail
-int				segv_test(void)
+int             segv_test(void)
 {
-	ft_strlen(NULL);
-	return (TEST_SUCCESS);
+    ft_strlen(NULL);
+    return (TEST_SUCCESS);
 }
 ```
 
